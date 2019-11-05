@@ -1,12 +1,18 @@
 package com.davemascia.lieutenants.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Lifter {
     public enum Size {
         XS, S, M, L, XL, TWO_XL, THREE_XL, FOUR_XL
@@ -35,14 +41,38 @@ public class Lifter {
     private Boolean isNotLifter;
     private Size tshirtSize;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_lieutenant")
+    @JsonBackReference
+    private Lieutenant lieutenant;
+
+
     public Lifter() {
     }
 
-    public Lifter(Integer id, String firstName, String lastName, String email) {
+    public Lifter(Integer id, @NotNull(message = "First name is required") String firstName, @NotNull(message = "Last name is required") String lastName, @NotNull(message = "Email Address is required") String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Lifter(Integer id, @NotNull(message = "First name is required") String firstName, @NotNull(message = "Last name is required") String lastName, @NotNull(message = "Email Address is required") String email, String street, String street2, String city, String state, String zip, String phone1, String phone2, Boolean isRemoved, Boolean isNotLifter, Size tshirtSize, Lieutenant lieutenant) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.street = street;
+        this.street2 = street2;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.isRemoved = isRemoved;
+        this.isNotLifter = isNotLifter;
+        this.tshirtSize = tshirtSize;
+        this.lieutenant = lieutenant;
     }
 
     public Integer getId() {
@@ -155,5 +185,13 @@ public class Lifter {
 
     public void setPhone2(String phone2) {
         this.phone2 = phone2;
+    }
+
+    public Lieutenant getLieutenant() {
+        return lieutenant;
+    }
+
+    public void setLieutenant(Lieutenant lieutenant) {
+        this.lieutenant = lieutenant;
     }
 }
