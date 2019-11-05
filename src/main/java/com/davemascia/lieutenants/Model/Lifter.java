@@ -28,12 +28,12 @@ public class Lifter {
     private String street2;
     private String city;
     private String state;
-    private String tshirtSize;
-    private Integer phone1;
-    private Integer phone2;
-    private Integer zip;
+    private String zip;
+    private String phone1;
+    private String phone2;
     private Boolean isRemoved;
     private Boolean isNotLifter;
+    private Size tshirtSize;
 
     public Lifter() {
     }
@@ -93,35 +93,19 @@ public class Lifter {
         this.state = state;
     }
 
-    public String getTshirtSize() {
+    public Size getTshirtSize() {
         return tshirtSize;
     }
 
-    public void setTshirtSize(String tshirtSize) {
+    public void setTshirtSize(Size tshirtSize) {
         this.tshirtSize = tshirtSize;
     }
 
-    public Integer getPhone1() {
-        return phone1;
-    }
-
-    public void setPhone1(Integer phone1) {
-        this.phone1 = phone1;
-    }
-
-    public Integer getPhone2() {
-        return phone2;
-    }
-
-    public void setPhone2(Integer phone2) {
-        this.phone2 = phone2;
-    }
-
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(Integer zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -155,5 +139,21 @@ public class Lifter {
 
     public void setStreet2(String street2) {
         this.street2 = street2;
+    }
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
     }
 }
